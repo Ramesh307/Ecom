@@ -1,0 +1,35 @@
+{% extends 'store/main.html' %}
+{% load static %}
+{% block content %}
+<section class="wrap-banner">
+	<div> 
+		<br>
+		<br>
+	 <h2> FeetIt</h2>
+	 </div>
+   </section>
+	<div class="row">
+		
+		{% for product in products %}
+		
+		<div class="col-lg-4">
+			<img class="thumbnail" >
+			<div class="box-element product">
+				<a href = {% url 'store:product_detail' product.id %}><h6><strong>{{product.name}}</strong></h6></a>
+
+				<img src = "{{product.image.url}}" width="100px" height="100px">
+				
+				<hr>
+				<h4 style="display: inline-block; float: right"><strong>Nrs:{{ product.price }}</strong></h4>
+				<form action="{% url 'cart:cart_add_main' product.id %}" method="post">
+					{% csrf_token %}
+					<input type="submit" value="Add to cart">
+				</form>
+			</div>
+		</div>
+		{% endfor %}
+	</div>
+
+{% endblock content %}
+
+    
